@@ -1,7 +1,7 @@
 # htaccess
 .htaccess template to improve security and avoid issues for Apache.
 
-```
+``` apacheconf
 # Force UTF-8 encoding
 AddDefaultCharset utf-8
 
