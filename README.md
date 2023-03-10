@@ -1,5 +1,5 @@
 # htaccess
-.htaccess template to improve security and avoid issues for Apache.
+Up to date .htaccess template to improve security and avoid issues for Apache.
 
 ``` apacheconf
 # Force UTF-8 encoding
@@ -54,9 +54,9 @@ Header set Permissions-Policy: accelerometer=(), camera=(), gyroscope=(), microp
 Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
-Header set X-Frame-Options: DENY
 Header unset platform
-Header unset Server
+Header unset pragma
+Header unset server
 Header unset x-powered-by
 </IfModule>
 
@@ -79,3 +79,15 @@ RewriteRule ^(.*)index.html$ https://%{HTTP_HOST}/$1 [R=301,L]
 RewriteCond %{THE_REQUEST} ^.*/index\.php
 RewriteRule ^(.*)index.php$ https://%{HTTP_HOST}/$1 [R=301,L]
 ```
+
+## DO NOT USE ANYMORE
+
+``` apacheconf
+X-XSS-Protection
+X-Frame-Options
+Pragma
+```
+
+[See also](https://developer.mozilla.org/fr/docs/Web/HTTP/Headers)
+
+PouletEnSlip ©
