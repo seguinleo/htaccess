@@ -55,8 +55,9 @@ Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
 Header set X-Frame-Options: DENY
-Header unset Server
 Header unset platform
+Header unset Server
+Header unset x-powered-by
 </IfModule>
 
 # Enable RewriteEngine
