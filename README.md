@@ -80,7 +80,7 @@ RewriteCond %{THE_REQUEST} ^.*/index\.php
 RewriteRule ^(.*)index.php$ https://%{HTTP_HOST}/$1 [R=301,L]
 ```
 
-## DO NOT USE ANYMORE
+## DO NOT USE ANYMORE :
 
 ``` apacheconf
 X-XSS-Protection
