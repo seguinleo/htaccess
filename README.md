@@ -54,6 +54,7 @@ Header set Permissions-Policy: accelerometer=(), camera=(), gyroscope=(), microp
 Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
+Header unset expires
 Header unset platform
 Header unset pragma
 Header unset server
