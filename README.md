@@ -1,9 +1,12 @@
 # htaccess
-Up to date .htaccess template to improve security and avoid issues for Apache.
+Up to date and safe .htaccess template to improve security and avoid issues for Apache2.
 
 ``` apacheconf
 # Force UTF-8 encoding
 AddDefaultCharset utf-8
+
+# Force JavaScript type to avoid old application/x-javascript
+AddType text/javascript .js
 
 # Redirect error pages
 ErrorDocument 401 https://YOUR_DOMAIN/error/401/
@@ -45,12 +48,16 @@ Deny from env=too_many_attempts
 
 # Custom headers (cache, security, etc.)
 <IfModule mod_headers.c>
+# ⚠️ modify the one below according to your needs
 Header set Cache-Control: no-cache
-Header set Content-Security-Policy: upgrade-insecure-requests; default-src 'none'; base-uri 'none'; child-src 'none'; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'; font-src 'self'; img-src 'self'; media-src 'none'; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'
+# ⚠️ modify the one below according to your needs
+Header set Content-Security-Policy: upgrade-insecure-requests; default-src 'none'; base-uri 'none'; child-src 'none'; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'; font-src 'self'; img-src 'self'; media-src 'none'; object-src 'none'; require-trusted-types-for 'script'; script-src 'self'; style-src 'self'; worker-src 'none'
 Header set Cross-Origin-Embedder-Policy: require-corp
-Header set Cross-Origin-Resource-Policy: cross-origin
+# ⚠️ modify the one below according to your needs
+Header set Cross-Origin-Resource-Policy: same-origin
 Header set Cross-Origin-Opener-Policy: same-origin
-Header set Permissions-Policy: accelerometer=(), camera=(), gyroscope=(), microphone=(), payment=()
+# ⚠️ modify the one below according to your needs
+Header set Permissions-Policy: camera=(), display-capture=(), fullscreen=(), geolocation=(), microphone=()
 Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
@@ -81,7 +88,7 @@ RewriteCond %{THE_REQUEST} ^.*/index\.php
 RewriteRule ^(.*)index.php$ https://%{HTTP_HOST}/$1 [R=301,L]
 ```
 
-## DO NOT USE ANYMORE :
+## DO NOT USE ANYMORE:
 
 ``` apacheconf
 X-XSS-Protection
