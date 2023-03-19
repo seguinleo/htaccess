@@ -53,8 +53,7 @@ Header set Cache-Control: no-cache
 # ⚠️ modify the one below according to your needs
 Header set Content-Security-Policy: upgrade-insecure-requests; default-src 'none'; base-uri 'none'; child-src 'none'; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'; font-src 'self'; img-src 'self'; media-src 'none'; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'
 Header set Cross-Origin-Embedder-Policy: require-corp
-# ⚠️ modify the one below according to your needs
-Header set Cross-Origin-Resource-Policy: same-origin
+Header set Cross-Origin-Resource-Policy: cross-origin
 Header set Cross-Origin-Opener-Policy: same-origin
 # ⚠️ modify the one below according to your needs
 Header set Permissions-Policy: camera=(), display-capture=(), fullscreen=(), geolocation=(), microphone=()
