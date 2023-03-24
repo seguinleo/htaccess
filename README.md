@@ -51,12 +51,12 @@ Deny from env=too_many_attempts
 # ⚠️ modify the one below according to your needs
 Header set Cache-Control: no-cache
 # ⚠️ modify the one below according to your needs
-Header set Content-Security-Policy: upgrade-insecure-requests; default-src 'none'; base-uri 'none'; child-src 'none'; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'; font-src 'self'; img-src 'self'; media-src 'none'; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'
+Header set Content-Security-Policy: upgrade-insecure-requests; default-src 'none'; base-uri 'none'; child-src 'none'; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'; font-src 'self'; form-action 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'
 Header set Cross-Origin-Embedder-Policy: require-corp
 Header set Cross-Origin-Resource-Policy: cross-origin
 Header set Cross-Origin-Opener-Policy: same-origin
 # ⚠️ modify the one below according to your needs
-Header set Permissions-Policy: camera=(), display-capture=(), fullscreen=(), geolocation=(), microphone=()
+Header set Permissions-Policy: camera=(), display-capture=(), fullscreen=(), microphone=()
 Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
