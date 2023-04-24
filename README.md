@@ -65,6 +65,7 @@ Header unset platform
 Header unset pragma
 Header unset server
 Header unset x-powered-by
+Header unset x-turbo-charged-by
 
 # Remove CSP for non-HTML resources
 <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ic[os]|jpe?g|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|png|rdf|rss|safariextz|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xpi)$">
