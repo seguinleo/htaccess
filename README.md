@@ -9,10 +9,9 @@ AddDefaultCharset utf-8
 AddType text/javascript .js
 
 # Redirect error pages
-ErrorDocument 401 https://YOUR_DOMAIN/error/401/
-ErrorDocument 403 https://YOUR_DOMAIN/error/403/
-ErrorDocument 404 https://YOUR_DOMAIN/error/404/
-ErrorDocument 500 https://YOUR_DOMAIN/error/500/
+ErrorDocument 401 /error/401/
+ErrorDocument 403 /error/403/
+ErrorDocument 404 /error/404/
 
 # Block access to certain files
 <FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
@@ -60,7 +59,6 @@ Header set Permissions-Policy: camera=(), display-capture=(), fullscreen=(), mic
 Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
-Header unset expires
 Header unset platform
 Header unset pragma
 Header unset server
@@ -102,5 +100,3 @@ Pragma
 ```
 
 [Source](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
-
-PouletEnSlip ©
