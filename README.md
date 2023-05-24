@@ -2,11 +2,11 @@
 Up to date and safe .htaccess template to improve security and avoid issues for Apache2.
 
 ``` apacheconf
-# Force UTF-8 encoding
-AddDefaultCharset utf-8
+# Disable server signature
+ServerSignature Off
 
-# Force JavaScript type to avoid old application/x-javascript
-AddType text/javascript .js
+# Disable directory browsing
+Options -Indexes
 
 # Redirect error pages
 ErrorDocument 401 /error/401/
@@ -14,38 +14,11 @@ ErrorDocument 403 /error/403/
 ErrorDocument 404 /error/404/
 
 # Block access to certain files
-<FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
-Order Allow,Deny
-Deny from all
+<FilesMatch "(^\.ht|\.htaccess|\.htpasswd|\.ini|\.phps|\.log|\.sh|\.env|\.bak|\.config|\.sql|\.xml|config.php)">
+Require all denied
 </FilesMatch>
 
-# Disable server signature
-ServerSignature Off
-
-# Disable directory browsing
-Options -Indexes
-
-# Enable protection against query injection attacks
-<IfModule mod_security.c>
-SecFilterEngine On
-SecFilterScanPOST On
-SecFilterCheckURLEncoding On
-SecFilterCheckCookieFormat On
-SecFilterCheckUnicodeEncoding On
-SecFilterNormalizeCookies On
-SecFilterNormalizeEncoding On
-</IfModule>
-
-# Limit HTTP connections attempts (ex: .htpasswd)
-<IfModule mod_auth.c>
-<Limit LOGIN>
-Order Allow,Deny
-Allow from all
-Deny from env=too_many_attempts
-</Limit>
-</IfModule>
-
-# Custom headers (cache, security, etc.)
+# Add custom headers (cache, security, permissions, etc.)
 <IfModule mod_headers.c>
 # ⚠️ modify the one below according to your needs
 Header set Cache-Control: no-cache
@@ -59,34 +32,29 @@ Header set Permissions-Policy: camera=(), display-capture=(), fullscreen=(), mic
 Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
+# Remove useless headers
 Header unset platform
 Header unset pragma
 Header unset server
 Header unset x-powered-by
 Header unset x-turbo-charged-by
 
-# Remove CSP for non-HTML resources
-<FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ic[os]|jpe?g|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|png|rdf|rss|safariextz|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xpi)$">
-Header unset Content-Security-Policy
-</FilesMatch>
-</IfModule>
-
 # Enable RewriteEngine
 RewriteEngine On
 
-# Disable TRACE and TRACK requests
+# Disable TRACE and TRACK requests (Cloudflare disables it by default)
 RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
-RewriteRule .* - [F]
+RewriteRule .* - [F,L]
 
 # Redirect www to non-www
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-# Rewrite index.html to /
+# Rewrite /index.html to /
 RewriteCond %{THE_REQUEST} ^.*/index\.html
 RewriteRule ^(.*)index.html$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-# Rewrite index.php to /
+# Rewrite /index.php to /
 RewriteCond %{THE_REQUEST} ^.*/index\.php
 RewriteRule ^(.*)index.php$ https://%{HTTP_HOST}/$1 [R=301,L]
 ```
@@ -97,6 +65,7 @@ RewriteRule ^(.*)index.php$ https://%{HTTP_HOST}/$1 [R=301,L]
 X-XSS-Protection
 X-Frame-Options
 Pragma
+Feature-Policy
 ```
 
 [Source](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
