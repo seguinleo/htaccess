@@ -20,6 +20,7 @@ Require all denied
 
 # Add custom headers (cache, security, permissions, etc.)
 <IfModule mod_headers.c>
+Header set Access-Control-Allow-Origin: https://YOUR_DOMAIN/
 # ⚠️ modify the one below according to your needs
 Header set Cache-Control: no-cache
 # ⚠️ modify the one below according to your needs
