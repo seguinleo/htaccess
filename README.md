@@ -33,6 +33,7 @@ Header set Permissions-Policy: camera=(), display-capture=(), fullscreen=(), mic
 Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
+Header set X-Frame-Options: DENY # <- not required if CSP frame-ancestors 'none';
 # Remove useless headers
 Header unset platform
 Header unset pragma
@@ -64,7 +65,6 @@ RewriteRule ^(.*)index.php$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 ``` apacheconf
 X-XSS-Protection
-X-Frame-Options
 Pragma
 Feature-Policy
 ```
