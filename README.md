@@ -8,23 +8,28 @@ ServerSignature Off
 # Disable directory browsing
 Options -Indexes
 
+# Force UTF-8 encoding
+AddDefaultCharset utf-8
+
+# Force JavaScript type to avoid old application/x-javascript
+AddType text/javascript .js
+
 # Redirect error pages
 ErrorDocument 401 /error/401/
 ErrorDocument 403 /error/403/
 ErrorDocument 404 /error/404/
 
 # Block access to certain files
-<FilesMatch "(^\.ht|\.htaccess|\.htpasswd|\.ini|\.phps|\.log|\.sh|\.env|\.bak|\.config|\.sql|\.xml|config.php)">
+<FilesMatch "(^\.ht|\.htaccess|\.htpasswd|\.ini|\.phps|\.log|\.sh|\.env|\.bak|\.config|\.sql|config.php)">
 Require all denied
 </FilesMatch>
 
 # Add custom headers (cache, security, permissions, etc.)
-<IfModule mod_headers.c>
 Header set Access-Control-Allow-Origin: https://YOUR_DOMAIN/
 # ⚠️ modify the one below according to your needs
 Header set Cache-Control: no-cache
 # ⚠️ modify the one below according to your needs
-Header set Content-Security-Policy: upgrade-insecure-requests; default-src 'none'; base-uri 'none'; child-src 'none'; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'; font-src 'self'; form-action 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'
+Header set Content-Security-Policy: upgrade-insecure-requests; default-src 'none'; base-uri 'none'; child-src 'none'; connect-src 'self'; frame-ancestors 'none'; frame-src 'none'; font-src 'self'; form-action 'self'; img-src 'self'; manifest-src 'self'; media-src 'none'; object-src 'none'; script-src 'self'; script-src-attr 'none'; script-src-elem 'self'; style-src 'self'; worker-src 'self'
 Header set Cross-Origin-Embedder-Policy: require-corp
 Header set Cross-Origin-Resource-Policy: cross-origin
 Header set Cross-Origin-Opener-Policy: same-origin
@@ -34,7 +39,8 @@ Header set Referrer-Policy: strict-origin-when-cross-origin
 Header set Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 Header set X-Content-Type-Options: nosniff
 Header set X-Frame-Options: DENY # <- not required if CSP frame-ancestors 'none';
-# Remove useless headers
+# Remove useless/obsolete headers
+Header unset expires
 Header unset platform
 Header unset pragma
 Header unset server
