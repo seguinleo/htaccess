@@ -63,7 +63,7 @@ RewriteRule ^(.*)index.php$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # Enable Brotli
 <IfModule mod_brotli.c>
-	AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript
 </IfModule>
 ```
 
